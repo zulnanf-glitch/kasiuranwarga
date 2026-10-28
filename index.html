@@ -700,10 +700,14 @@
     <section id="page-warga" class="page-section hidden space-y-5">
       <div id="cardTambahWarga" class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200/70">
         <h2 class="text-base font-bold text-slate-800 mb-3">Tambah Data Keluarga Baru</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">NIK KTP (16 Digit)</label>
+            <input type="text" id="wNIK" maxlength="16" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')" placeholder="3215xxxxxxxxxxxx" class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm font-mono">
+          </div>
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Kepala Keluarga</label>
-            <input type="text" id="wNama" placeholder="Nama lengkap..." class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
+            <input type="text" id="wNama" placeholder="Nama lengkap sesuai KTP..." class="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm">
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Blok / No. Rumah</label>
@@ -720,12 +724,12 @@
                 <option value="Tetap">Warga Tetap</option>
                 <option value="Kontrak">Kontrak/Kos</option>
               </select>
-              <input type="number" id="wJmlAnggota" value="4" min="1" title="Jumlah Anggota Keluarga" class="w-14 px-2 py-2 border border-slate-200 rounded-xl text-xs text-center">
+              <input type="number" id="wJmlAnggota" value="4" min="1" title="Jumlah Anggota Keluarga" class="w-16 px-2 py-2 border border-slate-200 rounded-xl text-xs text-center">
             </div>
           </div>
           <div class="flex items-end">
             <button onclick="tambahWargaBaru()" id="btnTambah" class="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm rounded-xl transition h-[38px]">
-              ➕ Simpan KK
+              ➕ Simpan Data KK
             </button>
           </div>
         </div>
@@ -735,11 +739,11 @@
         <div class="flex flex-wrap justify-between items-center gap-3 mb-4">
           <div>
             <h2 class="text-base font-bold text-slate-800">Direktori Keluarga & Rumah (<span id="wTotal" class="text-blue-600">0</span> KK)</h2>
-            <p class="text-xs text-slate-500">Daftar kepala keluarga, nomor rumah, status hunian, dan kontak</p>
+            <p class="text-xs text-slate-500">Daftar kepala keluarga, NIK KTP, nomor rumah, status hunian, dan kontak</p>
           </div>
           <div class="relative w-full sm:w-64">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">🔍</span>
-            <input type="text" id="wSearch" placeholder="Cari nama atau nomor blok..." oninput="filterWarga()" class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-xl text-xs bg-slate-50 focus:bg-white focus:outline-none focus:border-blue-600">
+            <input type="text" id="wSearch" placeholder="Cari nama, NIK, atau blok..." oninput="filterWarga()" class="w-full pl-8 pr-3 py-2 border border-slate-200 rounded-xl text-xs bg-slate-50 focus:bg-white focus:outline-none focus:border-blue-600">
           </div>
         </div>
         <div id="wargaList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
@@ -991,12 +995,12 @@
           { id: 'JI03', nama: 'Kas Perbaikan Lingkungan / Kegiatan RT', nominal: 25000, tenggat: 'Sesuai kesepakatan', sifat: 'Insidental / Sukarela' }
         ],
         warga: [
-          { id: 'W001', nama: 'Budi Santoso', alamat: 'Blok A No. 1', nohp: '081234567801', statusRumah: 'Tetap', anggota: 4 },
-          { id: 'W002', nama: 'Siti Aminah', alamat: 'Blok A No. 2', nohp: '081234567802', statusRumah: 'Tetap', anggota: 3 },
-          { id: 'W003', nama: 'Agus Setiawan', alamat: 'Blok A No. 3', nohp: '081234567803', statusRumah: 'Kontrak', anggota: 2 },
-          { id: 'W004', nama: 'Dewi Lestari', alamat: 'Blok B No. 1', nohp: '081234567804', statusRumah: 'Tetap', anggota: 5 },
-          { id: 'W005', nama: 'Hendra Wijaya', alamat: 'Blok B No. 2', nohp: '081234567805', statusRumah: 'Tetap', anggota: 4 },
-          { id: 'W006', nama: 'Rina Kartika', alamat: 'Blok B No. 4', nohp: '081234567806', statusRumah: 'Kontrak', anggota: 3 }
+          { id: 'W001', nik: '3215011205850001', nama: 'Budi Santoso', alamat: 'Blok A No. 1', nohp: '081234567801', statusRumah: 'Tetap', anggota: 4 },
+          { id: 'W002', nik: '3215015408880002', nama: 'Siti Aminah', alamat: 'Blok A No. 2', nohp: '081234567802', statusRumah: 'Tetap', anggota: 3 },
+          { id: 'W003', nik: '3215012103900003', nama: 'Agus Setiawan', alamat: 'Blok A No. 3', nohp: '081234567803', statusRumah: 'Kontrak', anggota: 2 },
+          { id: 'W004', nik: '3215016211860004', nama: 'Dewi Lestari', alamat: 'Blok B No. 1', nohp: '081234567804', statusRumah: 'Tetap', anggota: 5 },
+          { id: 'W005', nik: '3215010907820005', nama: 'Hendra Wijaya', alamat: 'Blok B No. 2', nohp: '081234567805', statusRumah: 'Tetap', anggota: 4 },
+          { id: 'W006', nik: '3215014802930006', nama: 'Rina Kartika', alamat: 'Blok B No. 4', nohp: '081234567806', statusRumah: 'Kontrak', anggota: 3 }
         ],
         pembayaran: [
           { id: 'P001', idWarga: 'W001', nama: 'Budi Santoso', jenisIuran: 'Iuran Wajib Bulanan', bulan: curMonth, tahun: curYear, nominal: 50000, metode: 'QRIS', ket: 'Lunas scan QRIS M-BCA', tanggal: '04/' + String(now.getMonth()+1).padStart(2,'0') + '/' + curYear, buktiNama: 'qris_bca_budi.jpg', buktiImg: '' },
@@ -1038,6 +1042,14 @@
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
       } catch (e) {}
+      // Jika berjalan di dalam Google Apps Script, sinkronkan otomatis ke Google Sheets
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withFailureHandler(function(err) {
+            console.warn('Gagal sinkronisasi ke Google Sheets:', err);
+          })
+          .syncFullDatabase(db);
+      }
     }
 
     // =========================================================================
@@ -1049,6 +1061,20 @@
       document.getElementById('rTahun').value = now.getFullYear();
       document.getElementById('fBulan').value = BULAN_LIST[now.getMonth()];
       document.getElementById('rBulan').value = BULAN_LIST[now.getMonth()];
+
+      // Tarik data terbaru dari Google Sheets apabila dijalankan di Google Apps Script
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(function(serverDb) {
+            if (serverDb && serverDb.warga) {
+              try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(serverDb));
+              } catch (e) {}
+              if (currentUser) loadBeranda();
+            }
+          })
+          .getFullDatabase();
+      }
 
       checkExistingSession();
     });
@@ -1817,8 +1843,12 @@
         return;
       }
 
-      el.innerHTML = list.map(w =>
-        '<div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex justify-between items-start gap-3">' +
+      el.innerHTML = list.map(w => {
+        const nikDisplay = w.nik
+          ? (isAdmin ? w.nik : w.nik.slice(0, 6) + '******' + w.nik.slice(-4))
+          : 'Belum diisi';
+
+        return '<div class="p-4 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex justify-between items-start gap-3">' +
           '<div class="space-y-1">' +
             '<div class="flex items-center gap-2">' +
               '<span class="font-bold text-sm text-slate-800">' + esc(w.nama) + '</span>' +
@@ -1827,6 +1857,7 @@
                 esc(w.statusRumah || 'Tetap') +
               '</span>' +
             '</div>' +
+            '<div class="text-[11px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded-md border border-slate-200/70 inline-block">🪪 NIK: ' + esc(nikDisplay) + '</div>' +
             '<div class="text-xs text-slate-600 font-medium">🏠 ' + esc(w.alamat) + ' · 👨‍👩‍👧‍👦 ' + Number(w.anggota || 4) + ' Anggota KK</div>' +
             '<div class="text-[11px] text-slate-400">' + (w.nohp ? '📞 ' + esc(w.nohp) : 'Kontak belum diisi') + '</div>' +
           '</div>' +
@@ -1835,8 +1866,8 @@
               'Hapus' +
             '</button>'
           ) : '') +
-        '</div>'
-      ).join('');
+        '</div>';
+      }).join('');
     }
 
     function filterWarga() {
@@ -1844,22 +1875,30 @@
       const q = document.getElementById('wSearch').value.toLowerCase();
       renderWargaCards(db.warga.filter(w =>
         w.nama.toLowerCase().includes(q) ||
+        (w.nik && String(w.nik).toLowerCase().includes(q)) ||
         (w.alamat && w.alamat.toLowerCase().includes(q))
       ));
     }
 
     function tambahWargaBaru() {
+      const nik = document.getElementById('wNIK').value.trim();
       const nama = document.getElementById('wNama').value.trim();
       const alamat = document.getElementById('wAlamat').value.trim();
       const nohp = document.getElementById('wHP').value.trim();
       const statusRumah = document.getElementById('wStatusRumah').value;
       const anggota = Number(document.getElementById('wJmlAnggota').value) || 4;
 
+      if (!nik || nik.length !== 16) return toast('NIK KTP wajib diisi 16 digit angka!');
       if (!nama || !alamat) return toast('Nama Kepala Keluarga dan Nomor Blok wajib diisi!');
 
       const db = loadDb();
+      if (db.warga.some(w => w.nik === nik)) {
+        return toast('NIK KTP tersebut sudah terdaftar di data warga!');
+      }
+
       db.warga.push({
         id: 'W' + Date.now(),
+        nik,
         nama,
         alamat,
         nohp,
@@ -1868,11 +1907,12 @@
       });
       saveDb(db);
 
+      document.getElementById('wNIK').value = '';
       document.getElementById('wNama').value = '';
       document.getElementById('wAlamat').value = '';
       document.getElementById('wHP').value = '';
       loadWargaPage();
-      toast('Keluarga ' + nama + ' berhasil ditambahkan!');
+      toast('Keluarga ' + nama + ' (NIK: ' + nik + ') berhasil ditambahkan!');
     }
 
     function hapusW(id, nama) {
